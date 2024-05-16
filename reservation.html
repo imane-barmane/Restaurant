@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Réservation</title>
+    <link rel="stylesheet" type="text/css" href="styles/navbar.css">
+    <link rel="stylesheet" type="text/css" href="styles/footer.css">
+    <style>
+        #button {
+            width: 100%;
+            background: #4CAF50;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        #button {
+            width: 100%;
+            background: #4CAF50;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+        label {
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        #signup-container {
+            display: none;
+        }
+
+        .link {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #main-container {
+            width: 40%;
+            margin: auto;
+            padding: 20px 0;
+            min-height: 100vh;
+        }
+        .sub-container {
+            display: block;
+            padding: 10px;
+            background-color: #8dd97f;
+            border-radius: 8px;
+        }
+        body {
+            background-color: #6de793;
+            margin: 0;
+        }
+
+        #reservations-container {
+            display: none;
+        }
+        #reservations-container .header {
+            display: flex;
+            justify-content: space-between;
+        }
+        #reservations-container .header div {
+            display: inline-block;
+        }
+        .float-left {
+            float: left;
+        }
+        .float-right {
+            float: right;
+            margin: auto 0;
+        }
+
+        #reservation-form {
+            display: none;
+        }
+
+        table th, table td {
+            text-align: left;
+        }
+        .add-reservation-button {
+            border: none;
+            padding: 5px 10px;
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+
+        .disconnection-button {
+            border: none;
+            padding: 5px 10px;
+            background-color: #655b5b;
+            color: white;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav">
+        <ul class="left">
+            <li class="n home-link" id="m"><a href="home.html">chez Elle</a></li>
+        </ul>
+
+        <ul class="right">
+            <li class="n"><a href="menu.html">Menu</a></li>
+            <li class="n"><a href="reservation.html">Réservation</a></li>
+            <li class="n"><a href="#contact">Contact</a></li>
+            <li class="n"><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+    
+    <div id="main-container">
+        <div class="sub-container" id="signup-container">
+            <h2>Créer mon compte</h2>
+            <div>
+                <label for="fname">Prénom</label>
+                <input type="text" id="fname" placeholder="Votre prénom.."><br>
+                <span id="s1" class="error"></span><br>
+                <label for="flastname">Nom</label>
+                <input type="text" id="flastname" placeholder="Votre nom.."><br>
+                <span id="s2" class="error"></span><br>
+                <label for="fmail">Email</label>
+                <input type="text" id="email" placeholder="Votre email.."><br>
+                <span id="s3" class="error"></span><br>
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" placeholder="Votre mot de passe..." required><br>
+                <span id="s5" class="error"></span><br>
+                <label for="fnum">Numéro de téléphone</label>
+                <input type="text" id="fnum" placeholder="Votre numéro de téléphone.."><br>
+                <span id="s4" class="error"></span><br>
+    
+                <div>
+                    <span class="link" onclick="toggleSignUp(false)">Vous avez déjà un compte ? Se connecter</span>
+                </div>
+    
+                <button id="button" onclick="creerCompte()">Créer mon compte</button>
+            </div>
+        </div>
+    
+        <div class="sub-container" id="signin-container">
+            <h2>Connexion</h2>
+            <div>
+                <label for="fmail">Email</label>
+                <input type="text" id="email2" placeholder="Votre email.."><br>
+                <span id="s3" class="error"></span><br>
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password2" placeholder="Votre mot de passe..."><br>
+                <span id="s6" class="error"></span><br>
+    
+                <div>
+                    <span class="link" onclick="toggleSignUp(true)">Créer mon compte</span>
+                </div>
+    
+                <button onclick="seConnecter()" id="button">Se connecter</button>
+            </div>
+        </div>
+
+        <div id="reservations-container">
+            <div class="header">
+                <div class="float-left">
+                    <h1>Bonjour <span id="username"></span>,</h1>
+                </div>
+                
+                <div class="float-right">
+                    <button class="disconnection-button" onclick="seDeconnecter()">Déconnexion</button>
+                </div>
+            </div>
+            <div class="header">
+                <div class="float-left">
+                    <h2>Mes réservations</h2>
+                </div>
+
+                <div class="float-right">
+                    <button class="add-reservation-button" onclick="nouvelleReservation()">Nouvelle réservation</button>
+                </div>
+            </div>
+
+            <div id="reservations-liste">
+                <table id="table-reservations" style="width: 100%;">
+                    <tr>
+                        <th>Jour</th>
+                        <th>Heure</th>
+                        <th>Nombre de personnes</th>
+                    </tr>
+                </table>
+
+                <p id="pas-de-reservations">Vous n'avez pas de réservations.</p>
+            </div>
+
+            <div id="reservation-form">
+                <table>
+                    <tr>
+                        <td><label for="date">Date</label></td>
+                        <td><input type="date" id="date" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span class="error" id="date-error"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="heure">Heure</label></td>
+                        <td><input type="time" id="heure" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span class="error" id="heure-error"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="nb-personnes">Nombre de personnes</label></td>
+                        <td><input type="number" id="nb-personnes" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span class="error" id="nb-personnes-error"></span></td>
+                    </tr>
+                </table>
+
+                <button onclick="reserver()">Réserver</button>
+                <button onclick="retour()">Annuler</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer id="contact">
+        <div style="margin-bottom: 10px;">
+            <strong>Chez Elle</strong> <br>
+            boulevard allal al fassi, Marrakech, Maroc <br>
+            Téléphone : +212 5 24 30 30 99 <br>
+            Email : contact@chezelle.ma
+        </div>
+        <div style="margin-bottom: 10px;">
+            <strong>Heures d'ouverture :</strong> <br>
+            Lundi - Vendredi : 11h - 23h <br>
+            Samedi - Dimanche : 10h - 24h
+        </div>
+        <div>
+            <a href="https://www.facebook.com/chezelle" style="color: white; text-decoration: none; margin-right: 10px;">Facebook</a>
+            <a href="https://www.twitter.com/chezelle" style="color: white; text-decoration: none; margin-right: 10px;">Twitter</a>
+            <a href="https://www.instagram.com/chezelle" style="color: white; text-decoration: none;">Instagram</a>
+        </div>
+        <div style="margin-top: 10px;">
+            &copy; 2024 Chez Elle. Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+
+        function toggleSignUp(value) {
+            if(value) {
+                document.getElementById("signin-container").style.display = "none";
+                document.getElementById("signup-container").style.display = "block";
+            }
+            else {
+                document.getElementById("signin-container").style.display = "block";
+                document.getElementById("signup-container").style.display = "none";
+            }
+        }
+        
+        function creerCompte() {
+        
+            let nameValue = document.getElementById('fname').value;
+            let lastnameValue = document.getElementById('flastname').value;
+            let emailValue = document.getElementById('email').value;
+            let numValue = document.getElementById('fnum').value;
+            let passwordValue = document.getElementById('password').value;
+
+            
+            document.getElementById('s1').innerHTML = '';
+            document.getElementById('s2').innerHTML = '';
+            document.getElementById('s3').innerHTML = '';
+            document.getElementById('s4').innerHTML = '';
+            document.getElementById('s5').innerHTML = '';
+
+            let hasError = false;
+
+            if (nameValue === '') {
+                document.getElementById('s1').innerHTML = 'Le prénom doit être rempli';
+                hasError = true;
+            }
+            if (lastnameValue === '') {
+                document.getElementById('s2').innerHTML = 'Le nom doit être rempli';
+                hasError = true;
+            }
+            if (emailValue === '') {
+                document.getElementById('s3').innerHTML = "L'email doit être rempli";
+                hasError = true;
+            }
+            if (numValue === '') {
+                document.getElementById('s4').innerHTML = 'Le numéro de téléphone doit être rempli';
+                hasError = true;
+            }
+            if (passwordValue === '') {
+                document.getElementById('s5').innerHTML = 'Le mot de passe doit être rempli';
+                hasError = true;
+            }
+            if(hasError) {
+                return;
+            }
+
+            let newUser = {
+                firstName :nameValue,
+                lastName : lastnameValue,
+                email : emailValue,
+                numero : numValue,
+                password : passwordValue,
+                reservations: []
+            };
+
+            let users= [];
+            if(localStorage.getItem("users")){
+                users = JSON.parse(localStorage.getItem("users"));
+            }
+            users.push(newUser);
+            localStorage.setItem("users", JSON.stringify(users));
+
+            let a = confirm("Votre compte a été créer avec succès! Connecter vous pour continuer.");
+            if(a) {
+                window.location.replace("reservation.html");
+            }
+        }
+
+        function seConnecter() {
+            let emailValue = document.getElementById('email2').value;
+            let passValue = document.getElementById('password2').value;
+
+            document.getElementById('s6').innerHTML = '';
+            
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let user = null;
+
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].email === emailValue && users[i].password === passValue) {
+                    user = users[i];
+                    break;
+                }
+            }
+            
+            if(!user) {
+                document.getElementById('s6').innerHTML = 'Email ou mot de passe incorrect';
+                return;
+            }
+            
+            document.getElementById("signin-container").style.display = "none";
+            document.getElementById("reservations-container").style.display = "block";
+            
+            localStorage.setItem("user", JSON.stringify(user));
+
+            document.getElementById("username").innerHTML = user.firstName;
+            afficherReservations(user.reservations);
+        }
+
+        function afficherReservations(reservations) {
+            document.getElementById("reservations-liste").style.display = "block";
+            document.getElementById("reservation-form").style.display = "none";
+
+            // supprimer les anciennes reservations dans la table à l'aide de la classe
+            let reservationsElements = document.getElementsByClassName("reservation-tr");
+            while(reservationsElements.length > 0){
+                reservationsElements[0].parentNode.removeChild(reservationsElements[0]);
+            }
+
+            let reservationsTable = document.getElementById("table-reservations");
+
+            if(reservations.length > 0) {
+                document.getElementById("table-reservations").style.display = "table";
+                document.getElementById("pas-de-reservations").style.display = "none";
+            } else {
+                document.getElementById("table-reservations").style.display = "none";
+                document.getElementById("pas-de-reservations").style.display = "block";
+                return;
+            }
+
+            for(let i = 0; i < reservations.length; i++) {
+                const td1 = document.createElement("td");
+                const td2 = document.createElement("td");
+                const td3 = document.createElement("td");
+                
+                td1.innerHTML = reservations[i].date;
+                td2.innerHTML = reservations[i].heure;
+                td3.innerHTML = reservations[i].nbPersonnes;
+
+                const tr = document.createElement("tr");
+                tr.classList = "reservation-tr";
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+
+                reservationsTable.append(tr);
+            }
+        }
+
+        function nouvelleReservation() {
+            document.getElementById("reservations-liste").style.display = "none";
+            document.getElementById("reservation-form").style.display = "block";
+
+            document.getElementById("date").value = "";
+            document.getElementById("heure").value = "";
+            document.getElementById("nb-personnes").value = "";
+
+            document.getElementById("date-error").innerHTML = "";
+            document.getElementById("heure-error").innerHTML = "";
+            document.getElementById("nb-personnes-error").innerHTML = "";
+        }
+
+        function retour() {
+            document.getElementById("reservations-liste").style.display = "block";
+            document.getElementById("reservation-form").style.display = "none";
+        }
+
+        function reserver() {
+            let dateValue = document.getElementById("date").value;
+            let heureValue = document.getElementById("heure").value;
+            let nbPersonnesValue = document.getElementById("nb-personnes").value;
+
+            document.getElementById("date-error").innerHTML = "";
+            document.getElementById("heure-error").innerHTML = "";
+            document.getElementById("nb-personnes-error").innerHTML = "";
+
+            let hasError = false;
+
+            if(dateValue == "") {
+                document.getElementById("date-error").innerHTML = "Veuillez saisir une date";
+                hasError = true;
+            }
+            if(heureValue == "") {
+                document.getElementById("heure-error").innerHTML = "Veuillez saisir une heure";
+                hasError = true;
+            }
+            if(nbPersonnesValue == "") {
+                document.getElementById("nb-personnes-error").innerHTML = "Veuillez indiquer le nombre de personnes";
+                hasError = true;
+            }
+
+            if(hasError) {
+                return;
+            }
+
+            const reservation = {
+                date: dateValue,
+                heure: heureValue,
+                nbPersonnes: nbPersonnesValue
+            };
+            
+            let user = JSON.parse(localStorage.getItem("user"));
+            user.reservations.push(reservation);
+            localStorage.setItem("user", JSON.stringify(user));
+
+            let users = JSON.parse(localStorage.getItem("users"));
+
+            const index = users.findIndex(elem => elem.email == user.email);
+            users[index] = user;
+
+            localStorage.setItem("users", JSON.stringify(users));
+
+            afficherReservations(user.reservations);
+        }
+
+        function seDeconnecter() {
+            localStorage.removeItem("user");
+            window.location.replace("reservation.html");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" type="text/css" href="styles/navbar.css">
+    <style>
+        /* Bordure autour de la table et entre les cellules */
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        /* Bordures pour chaque cellule et espacement intérieur */
+        td {
+            border: 1px solid black;
+            padding: 10px; /* Réduit le padding */
+            text-align: center;
+        }
+
+        /* Style pour les en-têtes */
+        th {
+            background-color: lightgray;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        /* Taille maximale des images pour éviter un dépassement */
+        img {
+            max-width: 100px; /* Contrôle de la taille des images */
+            display: block; /* Pour centrer l'image dans la cellule */
+            margin: 0 auto;
+        }
+        body {
+            background-color: #6de793;
+            margin: 0;
+        }
+        #main-container {
+            padding-top: 20px;
+            width: 60%;
+            text-align: center;
+            margin: auto;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+        <ul class="left">
+            <li class="n home-link" id="m"><a href="home.html">chez Elle</a></li>
+        </ul>
+
+        <ul class="right">
+            <li class="n"><a href="menu.html">Menu</a></li>
+            <li class="n"><a href="reservation.html">Réservation</a></li>
+            <li class="n"><a href="#contact">Contact</a></li>
+            <li class="n"><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+    <div id="main-container">
+        <table>
+            <tr>
+                <th>Les entrées</th>
+                <th>Les plats principaux</th>
+                <th>Les desserts</th>
+            </tr>
+            <tr>
+                <td><img src="images/salade.jpeg" alt="Image de salade">Salade</td>
+                <td><img src="images/steak.jpeg" alt="Image de steak">Steak</td>
+                <td> <img src="images/tarte_aux_pommes.jpg" alt="Image de tarte aux pommes">Tarte aux pommes</td>
+            </tr>
+            <tr>
+                <td><img src="images/soupe.jpg" alt="image de soupe">Soupe</td>
+                <td><img src="images/poulet_roti.jpeg" alt="image de poulet roti">Poulet rôti</td>
+                <td><img src="images/creme brulee.jpeg" alt="image de creme brulee">Crème brûlée</td>
+            </tr>
+        </table>
+    </div>
+    <footer id="contact" style="background: #4CAF50; padding: 20px; color: white; text-align: center;">
+        <div style="margin-bottom: 10px;">
+            <strong>Chez Elle</strong> <br>
+            boulevard allal al fassi, Marrakech, Maroc <br>
+            Téléphone : +212 5 24 30 30 99 <br>
+            Email : contact@chezelle.ma
+        </div>
+        <div style="margin-bottom: 10px;">
+            <strong>Heures d'ouverture :</strong> <br>
+            Lundi - Vendredi : 11h - 23h <br>
+            Samedi - Dimanche : 10h - 24h
+        </div>
+        <div>
+            <a href="https://www.facebook.com/chezelle" style="color: white; text-decoration: none; margin-right: 10px;">Facebook</a>
+            <a href="https://www.twitter.com/chezelle" style="color: white; text-decoration: none; margin-right: 10px;">Twitter</a>
+            <a href="https://www.instagram.com/chezelle" style="color: white; text-decoration: none;">Instagram</a>
+        </div>
+        <div style="margin-top: 10px;">
+            &copy; 2024 Chez Elle. Tous droits réservés.
+        </div>
+    </footer>
+</body>
+</html>

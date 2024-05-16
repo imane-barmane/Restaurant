@@ -1,0 +1,33 @@
+nav {
+    background: #4CAF50;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between; 
+}
+.left {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+}
+
+.right {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+}
+
+nav li a {
+    text-decoration: none;
+    color: black;
+}
+
+.n {
+    padding: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.home-link {
+    font-size: 26px;
+}
